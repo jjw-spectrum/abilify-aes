@@ -9,9 +9,7 @@ These steps are written for relative beginners like me; if you're a more advance
 ## About FAERS
 [FAERS](https://open.fda.gov/data/faers/) is the FDA's Adverse Events Reporting System. It's essentially a huge database of every bad reaction to a drug ever reported to the FDA.
 
-The data in FAERS is not comprehensive or FDA-verified, and it can't be used to, say, compare two drugs and say which causes more bad reactions. But if used correctly, it can be a useful complement to the rest of your reporting.
-
-The other thing to know about FAERS is that it's a huge mess! Duplicates run rampant, records are often incomplete, and drug names are often inconsistent or misspelled. For example, here are just a few of the terms I used to capture the aripiprazole records:
+The data in FAERS is not comprehensive or FDA-verified, and it can't be used to, say, compare two drugs and say which causes more bad reactions. But if used correctly, it can be a useful complement to the rest of your reporting. The other thing to know about FAERS is that it's a huge mess! Duplicates run rampant, records are often incomplete, and drug names are often inconsistent or misspelled. For example, here are just a few of the terms I used to capture the aripiprazole records:
 -aripiprazol (left off the "e" to include Italian and other names for the drug)
 -ariprazol (a common misspelling)
 -abilify (the drug's brand name)

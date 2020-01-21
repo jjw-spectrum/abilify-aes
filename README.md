@@ -22,7 +22,7 @@ FAERS is accessible through a [public dashboard](https://www.fda.gov/drugs/quest
 
 ## How I did it
 
-### Data collection
+### Building the API query
 
 The openFDA drug adverse event API is an easy way to get specific slices of data from FAERS without doing an enormous amount of cleaning, sorting and searching all by yourself. But because the data is so incomplete and inconsistent, I kept my initial search fairly broad and narrowed it down myself.
 
@@ -40,7 +40,19 @@ But first, I had to get all the records where aripiprazole was listed. I tried o
 - response = requests.get('https://api.fda.gov/drug/event.json?api_key=QO1trbbs0hp1HnDlpauIWNjXcJ96LAdZfzBZgixY&search=(patient.drug.medicinalproduct:"aripiprazole")+(patient.drug.medicinalproduct:"abilify")+(patient.drug.activesubstance.activesubstancename:"aripiprazole")+(patient.drug.drugauthorizationnumb:"021436")&limit=100')
   Total: 80719
 
-By comparison, a search of FAERS public dashboard yielded just 60K results for a search of "aripiprazole."
+By comparison, a search of FAERS public dashboard yielded just 60K results for a search of "aripiprazole." So you can see why it's better to get the data yourself when you're looking at FAERS for reporting purposes.
+
+Ultimately, I decided to search each record in its entirety for a list of aripiprazole name variants, yielding 80915 results total. See blocks 2 and 3 of the notebook for the exact query and parameters I used.
+
+### Collecting 81K records
+
+There are some limits on how much data you can collect from the adverse events API at once. Here are some tricks I used to get around them.
+
+The API uses two parameters to page through results: "limit," which controls how many results are returned at once, and "skip," which controls how many records you pass by before you collect the next batch. There's a max limit of 100 and a max skip of 25K. To get around the skip limit, I batched my results by year. Within each year, I simply incremented "skip" by 100 each time I queried the API until I'd collected all the records for that year.
+
+See block 4 of the notebook for more detail on how I iterated through the "pages" of results.
+
+### Filtering the data
 
 
 

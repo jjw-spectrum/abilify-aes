@@ -9,14 +9,16 @@ These steps are written for relative beginners like me; if you're a more advance
 ## About FAERS
 [FAERS](https://open.fda.gov/data/faers/) is the FDA's Adverse Events Reporting System. It's essentially a huge database of every bad reaction to a drug ever reported to the FDA.
 
-The data in FAERS is not comprehensive or FDA-verified, and it can't be used to, say, compare two drugs and say which causes more bad reactions. But if used correctly, it can be a useful complement to the rest of your reporting. The other thing to know about FAERS is that it's a huge mess! Duplicates run rampant, records are often incomplete, and drug names are often inconsistent or misspelled. For example, here are just a few of the terms I used to capture the aripiprazole records:
--aripiprazol (left off the "e" to include Italian and other names for the drug)
--ariprazol (a common misspelling)
--abilify (the drug's brand name)
--aristada (the drug's brand name in the UK)
--
+The data in FAERS is not comprehensive or FDA-verified, and it can't be used on its own to, say, compare two drugs and say which causes more bad reactions. But if used correctly, it can be a useful complement to the rest of your reporting. Other examples of FAERS data used to great effect include [this](https://www.jsonline.com/story/news/investigations/2019/05/30/arthritis-psoriasis-drugs-darker-aspect-34-000-reports-deaths/1206103001/) *Milwaukee Journal-Sentinel* story on biologics and the *Palm Beach Post*'s [reporting](https://www.palmbeachpost.com/news/20180404/how-post-unearthed-local-roots-of-insys-story) on the opioid medication Subsys.
 
-FAERS is accessible through
+The other thing to know about FAERS is that it's a huge mess! Duplicates run rampant, records are often incomplete, and drug names are often inconsistent or misspelled. For example, here are just a few of the terms I used to capture the aripiprazole records:
+- aripiprazol (left off the "e" to include Italian and other names for the drug)
+- ariprazol (a common misspelling)
+- abilify (the drug's brand name)
+- aristada (the drug's brand name in the UK)
+Even when the information is there, it's often scattered across a variety of fields, including
+
+FAERS is accessible through a public dashboard, which is great for research purposes. But because of all the weirdness described above, I recommend either downloading, cleaning and collating the quarterly data files provided by the FDA or querying the openFDA API's drug endpoint. Because my query was so specific and ultimately only corresponded to a tiny slice of the jillions of records available, I opted for the latter option.
 
 ## How I did it
 

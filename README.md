@@ -18,11 +18,35 @@ The other thing to know about FAERS is that it's a huge mess! Duplicates run ram
 - aristada (the drug's brand name in the UK)
 Even when the information is there, it's often scattered across a variety of fields, including
 
-FAERS is accessible through a public dashboard, which is great for research purposes. But because of all the weirdness described above, I recommend either downloading, cleaning and collating the quarterly data files provided by the FDA or querying the openFDA API's drug endpoint. Because my query was so specific and ultimately only corresponded to a tiny slice of the jillions of records available, I opted for the latter option.
+FAERS is accessible through a [public dashboard](https://www.fda.gov/drugs/questions-and-answers-fdas-adverse-event-reporting-system-faers/fda-adverse-event-reporting-system-faers-public-dashboard), which is great for research purposes. But because of all the weirdness described above, I recommend either downloading, cleaning and collating the [quarterly data files](https://fis.fda.gov/extensions/FPD-QDE-FAERS/FPD-QDE-FAERS.html) provided by the FDA or querying the openFDA [drug adverse event API](https://open.fda.gov/apis/drug/event/). Because my query was so specific and ultimately only corresponded to a tiny slice of the jillions of records available, I opted for the latter method, which I'll describe below.
 
 ## How I did it
 
 ### Data collection
+
+The openFDA drug adverse event API is an easy way to get specific slices of data from FAERS without doing an enormous amount of cleaning, sorting and searching all by yourself. But because the data is so incomplete and inconsistent, I kept my initial search fairly broad and narrowed it down myself.
+
+That's what my script does- it queries the API for aripiprazole-related adverse events from each year, then winnows the 80K+ records down to fewer than 400 that were relevant to the investigation. Ahead of time, I decided that my criteria for what reactions to include were as follows:
+1. The event occurred in a child between the ages of 3-17.
+2. Aripiprazole is suspected to have caused the event.
+3. The aripiprazole was prescribed to treat autism.
+
+But first, I had to get all the records where aripiprazole was listed. I tried out a number of queries that searched various nested fields for all the name variations I could think of. A few attempts, and the number of records they retrieved, are listed below:
+
+- requests.get('https://api.fda.gov/drug/event.json?search=patient.drug.medicinalproduct:"aripiprazole"&limit=100')
+  Total: 15936
+- requests.get('https://api.fda.gov/drug/event.json?search=(patient.drug.medicinalproduct:"aripiprazole")+OR+(patient.drug.medicinalproduct:"abilify")&limit=100')
+  Total: 78723
+- response = requests.get('https://api.fda.gov/drug/event.json?api_key=QO1trbbs0hp1HnDlpauIWNjXcJ96LAdZfzBZgixY&search=(patient.drug.medicinalproduct:"aripiprazole")+(patient.drug.medicinalproduct:"abilify")+(patient.drug.activesubstance.activesubstancename:"aripiprazole")+(patient.drug.drugauthorizationnumb:"021436")&limit=100')
+  Total: 80719
+
+By comparison, a search of FAERS public dashboard yielded just 60K results for a search of "aripiprazole."
+
+
+
+
+
+
 
 ### Data analysis
 

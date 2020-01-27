@@ -4,7 +4,7 @@
 
 This GitHub repo contains the Jupyter Notebook I used to find adverse events in autistic children prescribed aripiprazole for the Spectrum story [Hed TK](https://www.spectrumnews.org). In this document, I'll describe how you can use this notebook for your own purposes. I'll also lay out the steps I took to go from the raw FAERS data to the visualization that you see in the story.
 
-These steps are written for relative beginners like me; if you're a more advanced user, you can skip straight to [Adapting the notebook](https://github.com/jjw-spectrum/abilify-aes/blob/master/README.md#adapting-the-notebook).
+These steps are written for relative beginners like me; if you're already an API/FAERS wiz, you can skip straight to [Adapting the notebook](https://github.com/jjw-spectrum/abilify-aes/blob/master/README.md#adapting-the-notebook).
 
 ## About FAERS
 [FAERS](https://open.fda.gov/data/faers/) is the FDA's Adverse Events Reporting System. It's essentially a huge database of every bad reaction to a drug ever reported to the FDA.
@@ -56,24 +56,28 @@ See block 4 of the notebook for more detail on how I iterated through the "pages
 
 Another quirk about FAERS data—while most adverse event reports include the patient's age in years, others give that info in weeks, months, or even decades. Others have no age info whatsoever. So I stripped out 32310 records with nothing in the 'patientonsetage' field. For the rest, I changed the contents of 'patientonsetage' based on the contents of the 'patientonsetageunit' field, which has a code for each possible age unit. See blocks 7 and 8 for details.
 
+Later on, to make subsequent filtering easier, I stripped out records where aripiprazole (or one of its spelling variants) was not included in the 'medicinalproduct' field. I then searched the removed rows to make sure I wasn't accidentally removing any related to autism. (See blocks 10 and 11.)
+
 ### Filtering the data
 
 Once the ages were standardized, I made a new list that included only records for patients who were between 3 and 17 years old at the time the reactions occurred—6750 in total. I also caught 53 stragglers with "None" in the 'patientonsetageunit' field, which means the cleaning method described above should be improved.
 
+Then, after some more cleaning, I filtered again to include only records with a 'drugcharacterization' value of 1, indicating that aripiprazole is suspected to have caused the bad reaction.
 
-
-
-
-
-
-
+Finally, I filtered by 'drugindication,' including only records in which aripiprazole was prescribed to treat autism.
 
 ### Data analysis
+
+I created a dataframe in pandas and iterated through the records, adding every individual reaction as a row. (Many adverse event reports include multiple reactions.) The result was a raw list of reactions, with one entry for every time a given reaction, like weight gain, was reported.
+
+You could probably just do the following analysis in pandas itself, but I exported the df to a csv and worked in Excel instead. I created a pivot table to count the frequency of each reaction. But this wouldn't work as a visualization on its own; there were hundreds of unique reactions, some of which, like dyskinesia and other movement disorders, seemed like they should be considered together. On the advice of 
+
+
 
 ## How you can do it
 
 ### Getting started with Jupyter Notebooks
-*Note: This setup is almost identical to what I learned in [Lam Thuy Vo](https://github.com/lamthuyvo)'s data journalism class at the CUNY Graduate School of Journalism. All credit for it goes to her*
+*Note: This setup is almost identical to what I learned in [Lam Thuy Vo](https://github.com/lamthuyvo)'s data journalism class at the CUNY Graduate School of Journalism. All credit for it goes to her.*
 
 The first step is to get set up with Jupyter inside a virtual environment.
 

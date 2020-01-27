@@ -18,7 +18,7 @@ The other thing to know about FAERS is that it's a huge mess! Duplicates run ram
 - aristada (the drug's brand name in the UK)
 Even when the information is there, it's often scattered across a variety of fields, including
 
-FAERS is accessible through a [public dashboard](https://www.fda.gov/drugs/questions-and-answers-fdas-adverse-event-reporting-system-faers/fda-adverse-event-reporting-system-faers-public-dashboard), which is great for research purposes. But because of all the weirdness described above, I recommend either downloading, cleaning and collating the [quarterly data files](https://fis.fda.gov/extensions/FPD-QDE-FAERS/FPD-QDE-FAERS.html) provided by the FDA or querying the openFDA [drug adverse event API](https://open.fda.gov/apis/drug/event/). Because my query was so specific and ultimately only corresponded to a tiny slice of the jillions of records available, I opted for the latter method, which I'll describe below.
+FAERS is accessible through a [public dashboard](https://www.fda.gov/drugs/questions-and-answers-fdas-adverse-event-reporting-system-faers/fda-adverse-event-reporting-system-faers-public-dashboard), which is great for research purposes. But because of all the weirdness described above, I recommend either querying the openFDA [drug adverse event API](https://open.fda.gov/apis/drug/event/) *or* downloading, cleaning and collating the [quarterly data files](https://fis.fda.gov/extensions/FPD-QDE-FAERS/FPD-QDE-FAERS.html) provided by the FDA. Because my query was so specific and ultimately only corresponded to a tiny slice of the jillions of records available, I opted for the former method, which I'll describe below.
 
 ## How I did it
 
@@ -42,7 +42,7 @@ But first, I had to get all the records where aripiprazole was listed. I tried o
 
 By comparison, a search of FAERS public dashboard yielded just 60K results for a search of "aripiprazole." So you can see why it's better to get the data yourself when you're looking at FAERS for reporting purposes.
 
-Ultimately, I decided to search each record in its entirety for a list of aripiprazole name variants, yielding 80915 results total. See blocks 2 and 3 of the notebook for the exact query and parameters I used.
+Ultimately, because different records stored drug names in different fields, (medicinalproduct, activesubstancename, etc.) I decided to search each record in its entirety for a list of aripiprazole name variants, yielding 80915 results total. See blocks 2 and 3 of the notebook for the exact query and parameters I used.
 
 ### Collecting 81K records
 
@@ -52,7 +52,15 @@ The API uses two parameters to page through results: "limit," which controls how
 
 See block 4 of the notebook for more detail on how I iterated through the "pages" of results.
 
+### Cleaning the data
+
+Another quirk about FAERS data—while most adverse event reports include the patient's age in years, others give that info in weeks, months, or even decades. Others have no age info whatsoever. So I stripped out 32310 records with nothing in the 'patientonsetage' field. For the rest, I changed the contents of 'patientonsetage' based on the contents of the 'patientonsetageunit' field, which has a code for each possible age unit. See blocks 7 and 8 for details.
+
 ### Filtering the data
+
+Once the ages were standardized, I made a new list that included only records for patients who were between 3 and 17 years old at the time the reactions occurred—6750 in total. I also caught 53 stragglers with "None" in the 'patientonsetageunit' field, which means the cleaning method described above should be improved.
+
+
 
 
 

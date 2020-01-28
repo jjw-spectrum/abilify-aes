@@ -66,12 +66,19 @@ Then, after some more cleaning, I filtered again to include only records with a 
 
 Finally, I filtered by 'drugindication,' including only records in which aripiprazole was prescribed to treat autism.
 
-### Data analysis
+### Classification and analysis
 
-I created a dataframe in pandas and iterated through the records, adding every individual reaction as a row. (Many adverse event reports include multiple reactions.) The result was a raw list of reactions, with one entry for every time a given reaction, like weight gain, was reported.
+I created a dataframe in pandas and iterated through the records, adding every individual reaction, stored in field 'reactionmeddrapt,' as a row. (Many adverse event reports include multiple reactions.) The result was a raw list of reactions, with one entry for every time a given reaction, like weight gain, was reported.
 
-You could probably just do the following analysis in pandas itself, but I exported the df to a csv and worked in Excel instead. I created a pivot table to count the frequency of each reaction. But this wouldn't work as a visualization on its own; there were hundreds of unique reactions, some of which, like dyskinesia and other movement disorders, seemed like they should be considered together. On the advice of 
+I exported the df to a csv; in Excel, I created a pivot table to count the frequency of each reaction. (You could probably just do the entire analysis in pandas too.) Theoretically, you could just plug the counts into a pie chart and be done with it. But this data won't make a good viz as-is; there are hundreds of unique reactions, some of which, like dyskinesia and other movement disorders, seemed like they should be considered together. Thankfully, because the reactions are already named using a medical taxonomy called [MedDRA](https://www.meddra.org/), it's simple enough to label them with MedDRA's own category information. I applied for a subscription and got free access to the MedDRA browser, which will do this "hierarchy analysis" on a properly formatted spreadsheet.
 
+Once the reactions were categorized, I was able to see which broad classes of reactions occurred most frequently in the FDA data. The final DV includes only the broad categories that represented more than 5% of the reported adverse events. And within each broad category, only subtypes that represent more than 5% of their category are included.
+
+I also excluded reports of the drug being taken incorrectly, as well as most of the "Investigations" category, which mainly includes lab test results. The exceptions to this rule are weight gain and weight loss, which I included under the "Metabolic" category.
+
+Finally, I adapted the names of the broad classes and subcategories to be shorter and more easily understood.
+
+For more details on my analysis, check out my [data diary](https://docs.google.com/document/d/1cRD68SWKSaM6tS_kHSqI6HiZumHVEm77wfyD0pNMtic/edit?usp=sharing). The spreadsheet where I did this work can be found in this repo in the "data" folder.
 
 
 ## How you can do it

@@ -105,7 +105,7 @@ Depending on what indication you're interested in, you may also want to update b
 #Any questions?
 If you need help or want more information, drop me a line at jaclyn@spectrumnews.org. And if this tutorial helps you with a project, I'd love to see the end result!
 
---
+---
 
 
-<a name="myfootnote1">1</a>: Footnote content goes here This isn't ideal- after all, what's the point of searching all fields when we're just going to limit ourselves to the 'medicinalproduct' field anyway? In my case specifically, all the reports I was interested in ended up having aripiprazole or one of its spelling variants in this field. And being able to name a specific field made it much, much easier to filter the data by drug characterization and indication. But your results may be different depending on what sort of drug and age range you're interested in. So my recommendation is to search all fields for your drug name, then adapt blocks 10-13 depending on how many relevant records have the 'medicinalproduct' field filled out.
+<a name="myfootnote1">1</a>: This isn't ideal- after all, what's the point of searching all fields when we're just going to limit ourselves to the 'medicinalproduct' field anyway? In my case specifically, all the reports I was interested in ended up having aripiprazole or one of its spelling variants in this field. And being able to name a specific field made it much, much easier to filter the data by drug characterization and indication. But your results may be different depending on what sort of drug and age range you're interested in. So my recommendation is to search all fields for your drug name, then adapt blocks 10-13 depending on how many relevant records have the 'medicinalproduct' field filled out.

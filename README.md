@@ -102,7 +102,7 @@ At minimum, you'll want to change the drug names in blocks 3, 4, and 10, plus th
 
 Depending on what indication you're interested in, you may also want to update blocks 11, 13 and 14.
 
-#Any questions?
+## Any questions?
 If you need help or want more information, drop me a line at jaclyn@spectrumnews.org. And if this tutorial helps you with a project, I'd love to see the end result!
 
 ---

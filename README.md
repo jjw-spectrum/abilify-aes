@@ -4,7 +4,7 @@
 
 This GitHub repo contains the Jupyter Notebook I used to find adverse events in autistic children prescribed aripiprazole for the Spectrum story [How aripiprazole’s promise for treating autism fell short](https://www.spectrumnews.org/features/deep-dive/the-rise-of-aripiprazole/). Here, I'll describe how you can use this notebook for your own purposes. I'll also lay out the steps I took to go from the raw FAERS data to the visualization that you see in the story.
 
-These steps are written for relative beginners like me; if you're already an API/FAERS wiz, you can skip straight to the "[Getting the notebook running]"(https://github.com/jjw-spectrum/abilify-aes#getting-the-notebook-running) section.
+These steps are written for relative beginners like me; if you're already an API/FAERS wiz, you can skip straight to the [Getting the notebook running](https://github.com/jjw-spectrum/abilify-aes#getting-the-notebook-running) section.
 
 ## About FAERS
 [FAERS](https://open.fda.gov/data/faers/) is the FDA's Adverse Events Reporting System. It's essentially a huge database of every bad reaction to a drug ever reported to the FDA.

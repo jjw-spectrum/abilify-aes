@@ -40,7 +40,7 @@ See block 4 of the notebook for more detail on how I iterated through the "pages
 
 Another quirk about FAERS data—while most adverse event reports include the patient's age in years, others give that info in weeks, months, or even decades. Others have no age info whatsoever. So I stripped out 32310 records with nothing in the 'patientonsetage' field. For the rest, I changed the contents of 'patientonsetage' based on the contents of the 'patientonsetageunit' field, which has a code for each possible age unit. See blocks 7 and 8 for details.
 
-Later on, to make subsequent filtering easier, I stripped out records where aripiprazole (or one of its spelling variants) was not included in the 'medicinalproduct' field. I then searched the removed rows to make sure I wasn't accidentally removing any related to autism. (See blocks 10 and 11.)[^1]
+Later on, to make subsequent filtering easier, I stripped out records where aripiprazole (or one of its spelling variants) was not included in the 'medicinalproduct' field. I then searched the removed rows to make sure I wasn't accidentally removing any related to autism. (See blocks 10 and 11.)<sup>[1](#myfootnote1)</sup>
 
 ### Filtering the data
 
@@ -102,5 +102,10 @@ At minimum, you'll want to change the drug names in blocks 3, 4, and 10, plus th
 
 Depending on what indication you're interested in, you may also want to update blocks 11, 13 and 14.
 
+#Any questions?
+If you need help or want more information, drop me a line at jaclyn@spectrumnews.org. And if this tutorial helps you with a project, I'd love to see the end result!
 
-[^1] This isn't ideal- after all, what's the point of searching all fields when we're just going to limit ourselves to the 'medicinalproduct' field anyway? In my case specifically, all the reports I was interested in ended up having aripiprazole or one of its spelling variants in this field. And being able to name a specific field made it much, much easier to filter the data by drug characterization and indication. But your results may be different depending on what sort of drug and age range you're interested in. So my recommendation is to search all fields for your drug name, then adapt blocks 10-13 depending on how many relevant records have the 'medicinalproduct' field filled out.
+--
+
+
+<a name="myfootnote1">1</a>: Footnote content goes here This isn't ideal- after all, what's the point of searching all fields when we're just going to limit ourselves to the 'medicinalproduct' field anyway? In my case specifically, all the reports I was interested in ended up having aripiprazole or one of its spelling variants in this field. And being able to name a specific field made it much, much easier to filter the data by drug characterization and indication. But your results may be different depending on what sort of drug and age range you're interested in. So my recommendation is to search all fields for your drug name, then adapt blocks 10-13 depending on how many relevant records have the 'medicinalproduct' field filled out.

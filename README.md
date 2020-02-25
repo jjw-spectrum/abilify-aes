@@ -2,7 +2,7 @@
 ### By: Jaclyn Jeffrey-Wilensky (jaclyn@spectrumnews.org)
 
 
-This GitHub repo contains the Jupyter Notebook I used to find adverse events in autistic children prescribed aripiprazole for the Spectrum story [How aripiprazole’s promise for treating autism fell short](https://www.spectrumnews.org/features/deep-dive/the-rise-of-aripiprazole/). Here, I'll describe how you can use this notebook for your own purposes. I'll also lay out the steps I took to go from the raw FAERS data to the visualization that you see in the story.
+This GitHub repo contains the Jupyter Notebook I used to find adverse events in autistic children who took aripiprazole. *Spectrum* used this data to create a chart for the story [How aripiprazole’s promise for treating autism fell short](https://www.spectrumnews.org/features/deep-dive/the-rise-of-aripiprazole/). Here, I'll describe how you can use this notebook for your own purposes. I'll also lay out the steps I took to go from the raw FAERS data to the visualization that you see in the story.
 
 These steps are written for relative beginners like me; if you're already an API/FAERS wiz, you can skip straight to the [Getting the notebook running](https://github.com/jjw-spectrum/abilify-aes#getting-the-notebook-running) section.
 
@@ -19,14 +19,14 @@ FAERS is accessible through a [public dashboard](https://www.fda.gov/drugs/quest
 
 ### Building the API query
 
-The openFDA drug adverse event API is an easy way to get specific slices of data from FAERS without doing an enormous amount of cleaning, sorting and searching all by yourself. It also takes care of duplicates for you, unlike the quarterly data files. But because the data is so incomplete and inconsistent, I kept my initial search fairly broad and narrowed it down myself.
+The openFDA drug adverse event API is an easy way to get specific slices of data from FAERS without doing an enormous amount of cleaning, sorting and searching all by yourself. It also takes care of duplicates for you, unlike the quarterly data files. But because the data are so incomplete and inconsistent, I kept my initial search fairly broad and narrowed it down myself.
 
-That's what my script does- it queries the API for aripiprazole-related adverse events from each year, then winnows the 80K+ records down to fewer than 400 that were relevant to the story. Ahead of time, I decided that my criteria for what reactions to include were as follows:
+That's what my script does — it queries the API for aripiprazole-related adverse events from each year, then winnows the 80K+ records down to fewer than 400 that were relevant to the story. Ahead of time, I decided that my criteria for what reactions to include were as follows:
 1. The event occurred in a child between the ages of 3-17.
 2. Aripiprazole is suspected to have caused the event.
 3. The aripiprazole was prescribed to treat autism.
 
-But first, I had to get all the records where aripiprazole was listed. I tried out a number of queries that searched various nested fields for all the name variations I could think of. Ultimately, because different records stored drug names in different fields, (medicinalproduct, activesubstancename, etc.) I decided to search each record in its entirety for a list of aripiprazole name variants, yielding 80915 results total. (By comparison, a search of FAERS public dashboard yielded just 60K results for a search of "aripiprazole." So you can see why it's better to get the data yourself when you're looking at FAERS for reporting purposes.) See blocks 2 and 3 of the notebook for the exact query and parameters I used.
+But first, I had to get all the records where aripiprazole was listed. I tried out a number of queries that searched various nested fields for all the name variations I could think of. Ultimately, because different records stored drug names in different fields, (medicinalproduct, activesubstancename, etc.) I decided to search each record in its entirety for a list of aripiprazole name variants, yielding 80,915 results total. (By comparison, a search of FAERS public dashboard yielded just 60K results for a search of "aripiprazole." So you can see why it's better to get the data yourself when you're looking at FAERS for reporting purposes.) See blocks 2 and 3 of the notebook for the exact query and parameters I used.
 
 ### Collecting 81K records
 
